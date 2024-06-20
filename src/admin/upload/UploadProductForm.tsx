@@ -15,6 +15,15 @@ const UploadProductForm: React.FC = () => {
   const [image, setImage] = useState<null | File>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      setImage(files[0]);
+    } else {
+      setImage(null);
+    }
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -46,7 +55,7 @@ const UploadProductForm: React.FC = () => {
   };
 
   return (
-    <div className="w-[100vw] flex flex-col items-center justify-center    px-6 bg-white rounded-lg shadow-md">
+    <div className="w-[100vw] flex flex-col items-center justify-center px-6 bg-white rounded-lg shadow-md">
       {isLoading ? <Loader /> : null}
       <h2 className="text-2xl font-semibold mb-4">Upload Product</h2>
       <form onSubmit={handleSubmit} className="space-y-6 w-[90vw] md:w-[35vw]">
@@ -134,7 +143,7 @@ const UploadProductForm: React.FC = () => {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={handleFileChange}
             className="mt-1 block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer focus:outline-none"
           />
         </div>
