@@ -16,7 +16,7 @@ const Login: React.FC = () => {
   const loginUser = async () => {
     try {
       setLoader(true);
-      const res = await axios.post("/api/users/login", {
+      const res = await axios.post("https://ecommerce-frontend-phi.vercel.app/api/v1/users/login", {
         email,
         password,
       });
