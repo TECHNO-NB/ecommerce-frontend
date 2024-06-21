@@ -3,6 +3,7 @@ import Navbar from "../navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { deleteProducts } from "../redux/ProductSlice";
+import StripeCheckout from "react-stripe-checkout";
 
 interface ProductQuantity {
   [key: string]: number; // key is the product _id
@@ -94,10 +95,15 @@ const Cart: React.FC = () => {
             </div>
           ))}
           {/* card end here */}
-          <div className="border py-2 mt-2 flex items-center ">
+          <div className="border py-2 mt-2 flex justify-between items-center ">
             <h1 className="font-bold ml-4 text-xl ">{`Total: $${totalPrice.toFixed(
               2
             )}`}</h1>
+            {products.length === 0 ? null : (
+              <div className="mr-2 md:mr-6">
+                <StripeCheckout stripeKey="" token={() => {}} name="Checkout" />
+              </div>
+            )}
           </div>
         </div>
       </div>
