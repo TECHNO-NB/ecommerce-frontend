@@ -16,13 +16,13 @@ const Login: React.FC = () => {
   const loginUser = async () => {
     try {
       setLoader(true);
+      axios.defaults.withCredentials = true;
       const res = await axios.post(
         "https://ecommerce-backend-r13r.onrender.com/api/v1/users/login",
         {
           email,
           password,
-        },
-        { withCredentials: true }
+        }
       );
 
       setEmail("");
