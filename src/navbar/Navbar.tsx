@@ -5,6 +5,7 @@ import { IoIosSearch } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { MdLogout } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +13,11 @@ const Navbar: React.FC = () => {
   const user = useSelector((state: RootState) => state.user);
   const navigateUser = (link: string): void => {
     navigate(link);
+    if(link==="/login"){
+      toast.success("Logout SuccessFully")
+      localStorage.removeItem("persist:root");
+
+    }
   };
 
   return (
