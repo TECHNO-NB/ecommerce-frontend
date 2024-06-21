@@ -1,15 +1,22 @@
 import React from "react";
 import { IoCartOutline } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
+
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
 import { IoIosAddCircleOutline } from "react-icons/io";
+import { MdLogout } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const AdminNavbar: React.FC = () => {
   const navigate = useNavigate();
 
   const navigateUser = (link: string): void => {
     navigate(link);
+    if(link==="/login"){
+      toast.success("Logout SuccessFully")
+      localStorage.removeItem("persist:root");
+
+    }
   };
 
   return (
@@ -37,8 +44,8 @@ const AdminNavbar: React.FC = () => {
           <IoCartOutline className="text-2xl" />
           <p className="absolute top-[-0.9em]  text-red-800 left-2 ">0</p>
         </li>
-        <li onClick={() => navigateUser("home")} className="cursor-pointer">
-          <CgProfile className="text-2xl" />
+        <li onClick={() => navigateUser("/login")} className="cursor-pointer">
+          <MdLogout className="text-2xl" />
         </li>
       </ul>
     </nav>
