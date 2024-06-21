@@ -41,7 +41,7 @@ const UploadProductForm: React.FC = () => {
       }
       console.log(formData);
 
-      const res = await axios.post("/api/admin/addproduct", formData);
+      const res = await axios.post("https://ecommerce-backend-r13r.onrender.com/api/v1/admin/addproduct", formData);
       toast.success("Added Successfully");
       navigate("/admin");
 

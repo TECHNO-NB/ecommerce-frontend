@@ -15,17 +15,20 @@ const Register: React.FC = () => {
   const registerUser = async () => {
     try {
       setLoader(true);
-      const res = await axios.post("/api/users/register", {
-        fullName,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://ecommerce-backend-r13r.onrender.com/api/v1/users/register",
+        {
+          fullName,
+          email,
+          password,
+        }
+      );
       setEmail("");
       setFullName("");
       setPassword("");
       setLoader(false);
 
-      console.log(res.data)
+      console.log(res.data);
       if (res.data.success) {
         toast.success("success");
         navigate("/login");
@@ -82,7 +85,13 @@ const Register: React.FC = () => {
         >
           Create My Account
         </button>
-        <h1 className="mt-4 text-center">Already have a account?<Link className="text-[#0086FF]" to="/login"> Login</Link></h1>
+        <h1 className="mt-4 text-center">
+          Already have a account?
+          <Link className="text-[#0086FF]" to="/login">
+            {" "}
+            Login
+          </Link>
+        </h1>
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
     }
     try {
       const deletedProduct = await axios.delete(
-        `/api/product/deleteoneproduct/${id}`
+        `https://ecommerce-backend-r13r.onrender.com/api/v1/product/deleteoneproduct/${id}`
       );
       console.log(deletedProduct.data);
       toast.success("Product deleted successfully");

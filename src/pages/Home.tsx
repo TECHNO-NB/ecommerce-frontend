@@ -16,7 +16,7 @@ const Home: React.FC = () => {
     try {
       (async () => {
         setIsloading(true);
-        const res = await axios.get("/api/product/getallproducts");
+        const res = await axios.get("https://ecommerce-backend-r13r.onrender.com/api/v1/product/getallproducts");
         setIsloading(false);
         setProducts(res.data.data);
       })();

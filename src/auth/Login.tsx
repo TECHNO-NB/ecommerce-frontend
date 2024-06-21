@@ -9,18 +9,22 @@ import { login } from "../redux/UserSlice";
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [loader, setLoader] = useState<Boolean>(false);
+  const [loader, setLoader] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const loginUser = async () => {
     try {
       setLoader(true);
-      const res = await axios.post("https://ecommerce-frontend-phi.vercel.app/api/v1/users/login", {
-        email,
-        password, 
+      const res = await axios.post(
+        "https://ecommerce-backend-r13r.onrender.com/api/v1/users/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      );
 
-      });
       setEmail("");
       setPassword("");
       setLoader(false);
@@ -49,15 +53,20 @@ const Login: React.FC = () => {
       }
     } catch (error) {
       setLoader(false);
-      console.log(error);
+      console.error(error);
       toast.error("Login Error");
     }
+  };
+
+  const loginWithGoogle = async () => {
+    // Implement Google sign-in logic here
+    toast.error("Google sign-in is not yet implemented");
   };
 
   return (
     <div className="flex items-center justify-center h-[100vh] sm:h-[100vh]">
       {loader && <Loader />}
-      <div className="bg-[#E0E6EC] w-[30em] h-full flex flex-col px-8 justify-center ">
+      <div className="bg-[#E0E6EC] w-[30em] h-full flex flex-col px-8 justify-center">
         <h1 className="text-2xl text-start sm:text-3xl">
           <span className="text-[#0086FF] font-bold">Login</span> your account
         </h1>
@@ -82,6 +91,7 @@ const Login: React.FC = () => {
         <button
           onClick={loginUser}
           className="bg-[#0086FF] rounded-[50px] mt-4 text-white text-xl w-[100px] h-[39px]"
+          disabled={loader}
         >
           Login
         </button>
@@ -93,8 +103,9 @@ const Login: React.FC = () => {
           </Link>
         </h1>
         <button
-          onClick={loginUser}
-          className="bg-[crimson] self-center  rounded-[5px] mt-4 text-white text-xl w-[300px] h-[39px]"
+          onClick={loginWithGoogle}
+          className="bg-[crimson] self-center rounded-[5px] mt-4 text-white text-xl w-[300px] h-[39px]"
+          disabled={loader}
         >
           Sign in with Google
         </button>
