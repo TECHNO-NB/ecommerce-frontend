@@ -6,6 +6,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/UserSlice";
 
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -58,10 +59,7 @@ const Login: React.FC = () => {
     }
   };
 
-  const loginWithGoogle = async () => {
-    // Implement Google sign-in logic here
-    toast.error("Google sign-in is not yet implemented");
-  };
+
 
   return (
     <div className="flex items-center justify-center h-[100vh] sm:h-[100vh]">
@@ -102,13 +100,7 @@ const Login: React.FC = () => {
             Register
           </Link>
         </h1>
-        <button
-          onClick={loginWithGoogle}
-          className="bg-[crimson] self-center rounded-[5px] mt-4 text-white text-xl w-[300px] h-[39px]"
-          disabled={loader}
-        >
-          Sign in with Google
-        </button>
+      
       </div>
     </div>
   );

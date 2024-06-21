@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/UserSlice";
 
 const Register: React.FC = () => {
   const [fullName, setFullName] = useState<string>("");
@@ -11,7 +15,7 @@ const Register: React.FC = () => {
   const [loader, setLoader] = useState<Boolean>(false);
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const registerUser = async () => {
     try {
       setLoader(true);
@@ -42,6 +46,50 @@ const Register: React.FC = () => {
       setFullName("");
       setPassword("");
       toast.error("Register Error");
+    }
+  };
+
+  const loginWithGoogle = async (detail: any) => {
+    try {
+      setLoader(true);
+      const res = await axios.post(
+        "https://ecommerce-backend-r13r.onrender.com/api/v1/users/googlelogin",
+        {
+          fullName: detail.name,
+          email: detail.email,
+          password: detail.jti,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      setLoader(false);
+      console.log(res.data);
+      if (res.data.success) {
+        toast.success("Login successful");
+        setTimeout(() => {
+          toast.success("Welcome " + res.data.data.user.fullName);
+        }, 2000);
+
+        const user = {
+          id: res.data.data.user._id,
+          fullName: res.data.data.user.fullName,
+          email: res.data.data.user.email,
+          role: res.data.data.user.role,
+          isLoggedIn: true,
+        };
+        dispatch(login(user));
+        if (res.data.data.user.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      setLoader(false);
+      console.log(error);
+      toast.error("Login Failed");
     }
   };
 
@@ -85,6 +133,19 @@ const Register: React.FC = () => {
         >
           Create My Account
         </button>
+        <div className=" self-center  rounded-[5px] mt-4 text-white ">
+          <GoogleLogin
+            onSuccess={(credentialResponse: any) => {
+              // console.log(credentialResponse);
+              const jwtDetail = jwtDecode(credentialResponse.credential);
+
+              loginWithGoogle(jwtDetail);
+            }}
+            onError={() => {
+              toast.error("Login Failed");
+            }}
+          />
+        </div>
         <h1 className="mt-4 text-center">
           Already have a account?
           <Link className="text-[#0086FF]" to="/login">
