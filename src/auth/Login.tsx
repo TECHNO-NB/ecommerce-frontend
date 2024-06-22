@@ -31,10 +31,6 @@ const Login: React.FC = () => {
 
       if (res.data.success) {
         toast.success("Login successful");
-        setTimeout(() => {
-          toast.success("Welcome " + res.data.data.user.fullName);
-        }, 2000);
-
         const user = {
           id: res.data.data.user._id,
           fullName: res.data.data.user.fullName,
@@ -46,15 +42,15 @@ const Login: React.FC = () => {
 
         if (res.data.data.user.role === "admin") {
           navigate("/admin");
-        } else if (res.data.data.user.role === "user") {
-          navigate("/");
         } else {
           navigate("/");
         }
+        setTimeout(() => {
+          toast.success("Welcome " + res.data.data.user.fullName);
+        }, 2000);
       } else {
         toast.error("Login Error");
       }
-      navigate("/");
     } catch (error) {
       setLoader(false);
       console.error(error);
