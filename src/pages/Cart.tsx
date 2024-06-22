@@ -101,7 +101,7 @@ const Cart: React.FC = () => {
             )}`}</h1>
             {products.length === 0 ? null : (
               <div className="mr-2 md:mr-6">
-                <StripeCheckout stripeKey="" token={() => {}} name="Checkout" />
+                <StripeCheckout stripeKey={`${import.meta.env.STRIPE_SCREATE}`} token={() => {}} name="Checkout" />
               </div>
             )}
           </div>
