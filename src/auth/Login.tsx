@@ -6,7 +6,6 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/UserSlice";
 
-
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -44,6 +43,7 @@ const Login: React.FC = () => {
           isLoggedIn: true,
         };
         dispatch(login(user));
+
         if (res.data.data.user.role === "admin") {
           navigate("/admin");
         } else {
@@ -52,14 +52,15 @@ const Login: React.FC = () => {
       } else {
         toast.error("Login Error");
       }
+      navigate("/");
+
     } catch (error) {
       setLoader(false);
       console.error(error);
       toast.error("Login Error");
     }
+   
   };
-
-
 
   return (
     <div className="flex items-center justify-center h-[100vh] sm:h-[100vh]">
@@ -100,7 +101,6 @@ const Login: React.FC = () => {
             Register
           </Link>
         </h1>
-      
       </div>
     </div>
   );

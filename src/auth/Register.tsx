@@ -85,12 +85,14 @@ const Register: React.FC = () => {
         } else {
           navigate("/");
         }
+        navigate("/");
       }
     } catch (error) {
       setLoader(false);
       console.log(error);
       toast.error("Login Failed");
     }
+
   };
 
   return (
