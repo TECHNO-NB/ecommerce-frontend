@@ -82,10 +82,12 @@ const Register: React.FC = () => {
         dispatch(login(user));
         if (res.data.data.user.role === "admin") {
           navigate("/admin");
-        } else {
+        } else if(res.data.data.user.role === "admin") {
+          navigate("/");
+        }else{
           navigate("/");
         }
-        navigate("/");
+       
       }
     } catch (error) {
       setLoader(false);

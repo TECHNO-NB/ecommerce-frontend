@@ -46,6 +46,8 @@ const Login: React.FC = () => {
 
         if (res.data.data.user.role === "admin") {
           navigate("/admin");
+        } else if (res.data.data.user.role === "user") {
+          navigate("/");
         } else {
           navigate("/");
         }
@@ -53,13 +55,11 @@ const Login: React.FC = () => {
         toast.error("Login Error");
       }
       navigate("/");
-
     } catch (error) {
       setLoader(false);
       console.error(error);
       toast.error("Login Error");
     }
-   
   };
 
   return (
