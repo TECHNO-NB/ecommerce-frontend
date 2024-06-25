@@ -2,22 +2,23 @@ import React from "react";
 import { IoCartOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { MdLogout } from "react-icons/md";
-import toast from "react-hot-toast";
+import { openModal } from "../redux/ModalSlice";
+
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const product=useSelector((state:RootState)=>state.product)
   const user = useSelector((state: RootState) => state.user);
+  const dispatch=useDispatch();
   const navigateUser = (link: string): void => {
     navigate(link);
-    if(link==="/login"){
-      toast.success("Logout SuccessFully")
-      localStorage.removeItem("persist:root");
-
+    if(link ==="/login"){
+    dispatch(openModal(true))
     }
+    
   };
 
   return (
