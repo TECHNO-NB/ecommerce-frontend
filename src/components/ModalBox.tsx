@@ -11,8 +11,11 @@ import { useSelector } from "react-redux";
 
 export default function Example() {
  
- const modal= useSelector((state)=> state.modal)
- const [open, setOpen] = useState(modal);
+ const modal= useSelector((state:any)=> state.modal)
+ const [open, setOpen] = useState(false);
+
+ setOpen(modal)
+ 
 
   const logoutUser = async () => {
     toast.success("Logout SuccessFully");
