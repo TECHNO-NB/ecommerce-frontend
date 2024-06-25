@@ -5,6 +5,7 @@ import LandingPageComp from "../components/LandingPageComp";
 import axios from "axios";
 import VideoLoader from "../components/VideoLoader";
 import { useNavigate } from "react-router-dom";
+import ModalBox from "../components/ModalBox"
 
 
 const Home: React.FC = () => {
@@ -35,7 +36,7 @@ const Home: React.FC = () => {
       <div className="">
         <LandingPageComp />
       </div>
-
+             <ModalBox/> 
       <h1 className="text-3xl mt-2 font-bold pl-2 md:pl-16 md:text-5xl text-[#0086FF]">
         Products:
       </h1>
