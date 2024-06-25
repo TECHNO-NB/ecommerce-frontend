@@ -30,6 +30,7 @@ const Login: React.FC = () => {
       setLoader(false);
 
       if (res.data.success) {
+     
         toast.success("Login successful");
         const user = {
           id: res.data.data.user._id,
@@ -48,6 +49,7 @@ const Login: React.FC = () => {
         setTimeout(() => {
           toast.success("Welcome " + res.data.data.user.fullName);
         }, 2000);
+        navigate("/")
       } else {
         toast.error("Login Error");
       }
