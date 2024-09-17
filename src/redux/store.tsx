@@ -1,23 +1,22 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./UserSlice";
 import productReducer from "./ProductSlice";
+import ModalSlice from "./ModalSlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
-import ModalSlice from "./ModalSlice";
-
 
 // Define the persist configuration
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "product"],
+  whitelist: ["user", "product"], // Ensure these are the correct keys
 };
 
 // Combine reducers
 const rootReducer = combineReducers({
   user: userReducer,
   product: productReducer,
-  modal:ModalSlice,
+  modal: ModalSlice,
 });
 
 // Create a persisted reducer
@@ -29,11 +28,16 @@ export type RootState = ReturnType<typeof rootReducer>;
 // Configure the store with the persisted reducer
 const store = configureStore({
   reducer: persistedReducer,
+  // Add a middleware configuration to handle non-serializable values if needed
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // Turn off serializable check if absolutely necessary
+    }),
 });
 
 // Export the store and persistor
-export { store };
 export const persistor = persistStore(store);
 
 // Define AppDispatch type
 export type AppDispatch = typeof store.dispatch;
+export { store };

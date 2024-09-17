@@ -12,10 +12,9 @@ const AdminNavbar: React.FC = () => {
 
   const navigateUser = (link: string): void => {
     navigate(link);
-    if(link==="/login"){
-      toast.success("Logout SuccessFully")
+    if (link === "/login") {
+      toast.success("Logout SuccessFully");
       localStorage.removeItem("persist:root");
-
     }
   };
 

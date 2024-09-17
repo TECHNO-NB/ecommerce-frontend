@@ -16,11 +16,12 @@ const Register: React.FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const registerUser = async () => {
     try {
       setLoader(true);
       const res = await axios.post(
-        "https://ecommerce-backend-r13r.onrender.com/api/v1/users/register",
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/register`,
         {
           fullName,
           email,
@@ -53,7 +54,7 @@ const Register: React.FC = () => {
     try {
       setLoader(true);
       const res = await axios.post(
-        "https://ecommerce-backend-r13r.onrender.com/api/v1/users/googlelogin",
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/googlelogin`,
         {
           fullName: detail.name,
           email: detail.email,
@@ -66,12 +67,8 @@ const Register: React.FC = () => {
 
       setLoader(false);
       console.log(res.data);
+      console.log(res.data.success);
       if (res.data.success) {
-        toast.success("Login successful");
-        setTimeout(() => {
-          toast.success("Welcome " + res.data.data.user.fullName);
-        }, 2000);
-
         const user = {
           id: res.data.data.user._id,
           fullName: res.data.data.user.fullName,
@@ -80,21 +77,19 @@ const Register: React.FC = () => {
           isLoggedIn: true,
         };
         dispatch(login(user));
-        if (res.data.data.user.role === "admin") {
+        if (res.data.data.user.role == "admin") {
           navigate("/admin");
-        } else if(res.data.data.user.role === "admin") {
-          navigate("/");
-        }else{
+        } else {
           navigate("/");
         }
-       
+      } else {
+        toast.error("Login Error");
       }
     } catch (error) {
       setLoader(false);
       console.log(error);
       toast.error("Login Failed");
     }
-
   };
 
   return (

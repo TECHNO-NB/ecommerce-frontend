@@ -1,36 +1,26 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { RootState } from "../redux/store";
 
 interface ProtectedRouteProps {
   children: ReactNode;
+  requiredRole?: string; // Optional role check
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem("persist:root")
-  );
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requiredRole }) => {
   const user = useSelector((state: RootState) => state.user);
-  console.log(user.isLoggedIn);
+  console.log(user)
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setToken(localStorage.getItem("token"));
-    };
+  // Check if the user is logged in and optionally if the user has the required role
+  const isAuthenticated = user.isLoggedIn;
+  const hasRequiredRole = requiredRole ? user.role === requiredRole : true;
 
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
-
-  return user.isLoggedIn && token ? (
-    <>{children}</>
-  ) : (
-    <Navigate to="/login" replace />
-  );
+  if (isAuthenticated && hasRequiredRole) {
+    return <>{children}</>;
+  } else {
+    return <Navigate to="/login" replace />;
+  }
 };
 
 export default ProtectedRoute;

@@ -5,28 +5,26 @@ import LandingPageComp from "../components/LandingPageComp";
 import axios from "axios";
 import VideoLoader from "../components/VideoLoader";
 import { useNavigate } from "react-router-dom";
-import ModalBox from "../components/ModalBox"
-
+// import ModalBox from "../components/ModalBox";
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsloading] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
       (async () => {
         setIsloading(true);
-        const res = await axios.get("https://ecommerce-backend-r13r.onrender.com/api/v1/product/getallproducts");
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/product/getallproducts`);
         setIsloading(false);
         setProducts(res.data.data);
+        console.log(res.data)
       })();
     } catch (error) {
-     console.log(error)
-      navigate("/login")
+      console.log(error);
+      navigate("/login");
       setIsloading(false);
-     
-      
     }
   }, []);
 
@@ -36,7 +34,7 @@ const Home: React.FC = () => {
       <div className="">
         <LandingPageComp />
       </div>
-             <ModalBox/> 
+     
       <h1 className="text-3xl mt-2 font-bold pl-2 md:pl-16 md:text-5xl text-[#0086FF]">
         Products:
       </h1>

@@ -12,7 +12,7 @@ const AdminHome: React.FC = () => {
     try {
       (async () => {
         setIsloading(true);
-        const res = await axios.get("https://ecommerce-backend-r13r.onrender.com/api/v1/product/getallproducts");
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/product/getallproducts`);
         setIsloading(false);
         setProducts(res.data.data);
       })();
@@ -31,7 +31,7 @@ const AdminHome: React.FC = () => {
       return;
     }
     try {
-      const res = await axios.delete("https://ecommerce-backend-r13r.onrender.com/api/v1/product/deleteallproducts");
+      const res = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}api/v1/product/deleteallproducts`);
       console.log(res.data);
       toast.success("SuccessFully Deleted All Products");
       setTimeout(() => {

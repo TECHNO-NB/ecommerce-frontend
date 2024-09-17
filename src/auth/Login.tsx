@@ -18,7 +18,7 @@ const Login: React.FC = () => {
       setLoader(true);
       axios.defaults.withCredentials = true;
       const res = await axios.post(
-        "https://ecommerce-backend-r13r.onrender.com/api/v1/users/login",
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/login`,
         {
           email,
           password,
@@ -40,21 +40,24 @@ const Login: React.FC = () => {
         };
         dispatch(login(user));
 
+        // Add a console.log to verify the role and navigation
+        console.log("User role:", res.data.data.user.role);
+
         if (res.data.data.user.role === "admin") {
           navigate("/admin");
         } else {
           navigate("/");
         }
+
         setTimeout(() => {
           toast.success("Welcome " + res.data.data.user.fullName);
         }, 2000);
-        navigate("/");
       } else {
         toast.error("Login Error");
       }
     } catch (error) {
       setLoader(false);
-      console.error(error);
+      console.error("Login error:", error);
       toast.error("Login Error");
     }
   };
@@ -92,7 +95,7 @@ const Login: React.FC = () => {
           Login
         </button>
         <h1 className="mt-4 text-center">
-          Not have a account yet?
+          Not have an account yet?
           <Link className="text-[#0086FF]" to="/register">
             {" "}
             Register

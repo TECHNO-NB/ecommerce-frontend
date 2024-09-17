@@ -1,35 +1,29 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-import { RootState } from "../redux/store";
 
-interface ProtectedRouteProps {
+import { Navigate } from "react-router-dom";
+
+
+interface AdminProtectedRoute {
   children: ReactNode;
+  requiredRole: string;
 }
 
-const AdminProtected: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem("persist:root")
-  );
-  const user = useSelector((state: RootState) => state.user);
+const AdminProtected: React.FC<AdminProtectedRoute> = ({
+  children,
+  requiredRole,
+}) => {
+  const user = useSelector((state:any) => state.user);
+console.log(user)
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setToken(localStorage.getItem("token"));
-    };
 
-    window.addEventListener("storage", handleStorageChange);
+ if(user.role==="admin" && user.isLoggedIn  && requiredRole==="admin"){
+  return <>{children}</>
+ }else{
+  return <Navigate to="/login" replace={true} />
+ }
 
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
-
-  return user.isLoggedIn && token && user.role === "admin" ? (
-    <>{children}</>
-  ) : (
-    <Navigate to="/login" replace />
-  );
+  
 };
 
 export default AdminProtected;

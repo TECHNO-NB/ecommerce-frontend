@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const modalSLice = createSlice({
+
   name: "modal",
   initialState: false,
   reducers: {
-    openModal: (state,payload) => {
+      // @ts-ignore
+    openModal: (state,action) => {
       return true;
     },
   },

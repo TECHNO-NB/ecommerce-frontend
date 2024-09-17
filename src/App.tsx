@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
-import Home from "./pages/Home";
+
 import { Toaster } from "react-hot-toast";
 
 import ProtectedRoute from "./protectedRoute/ProtectedRoute";
@@ -12,6 +12,7 @@ import AdminProtected from "./protectedRoute/AdminProtected";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import AddProducts from "./admin/adminpages/AddProducts";
 import Cart from "./pages/Cart";
+import Home from "./pages/Home";
 
 const App: React.FC = () => {
   return (
@@ -25,7 +26,7 @@ const App: React.FC = () => {
                 <Home />
               </ProtectedRoute>
             }
-          />
+          ></Route>
           <Route
             path="/cart"
             element={
@@ -41,15 +42,15 @@ const App: React.FC = () => {
           <Route
             path="/admin"
             element={
-              <AdminProtected>
-                <AdminHome />
-              </AdminProtected>
+              <AdminProtected requiredRole="admin">
+              <AdminHome />
+             </AdminProtected>
             }
           />
           <Route
             path="/uploadproducts"
             element={
-              <AdminProtected>
+              <AdminProtected requiredRole="admin">
                 <AddProducts />
               </AdminProtected>
             }
