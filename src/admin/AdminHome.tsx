@@ -4,6 +4,7 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import Card from "../components/Card";
 import toast from "react-hot-toast";
+import Pagination from "../components/Pagination";
 
 const AdminHome: React.FC = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,9 @@ const AdminHome: React.FC = () => {
     try {
       (async () => {
         setIsloading(true);
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/product/getallproducts`);
+        const res = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/product/getallproducts`
+        );
         setIsloading(false);
         setProducts(res.data.data);
       })();
@@ -28,10 +31,12 @@ const AdminHome: React.FC = () => {
     );
     if (promptVal !== "YES ALL PRODUCTS") {
       toast.error("Product not deleted");
-      return;
+      return
     }
     try {
-      const res = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}api/v1/product/deleteallproducts`);
+      const res = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}api/v1/product/deleteallproducts`
+      );
       console.log(res.data);
       toast.success("SuccessFully Deleted All Products");
       setTimeout(() => {
@@ -52,6 +57,7 @@ const AdminHome: React.FC = () => {
       >
         Delete All
       </button>
+
       <div>
         {isLoading ? <Loader /> : null}
 
@@ -63,6 +69,7 @@ const AdminHome: React.FC = () => {
           </div>
         </div>
       </div>
+      <Pagination />
     </div>
   );
 };

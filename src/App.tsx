@@ -13,6 +13,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import AddProducts from "./admin/adminpages/AddProducts";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";
+import Search from "./pages/Search";
 
 const App: React.FC = () => {
   return (
@@ -35,6 +36,14 @@ const App: React.FC = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <Search />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Routes>
@@ -43,8 +52,8 @@ const App: React.FC = () => {
             path="/admin"
             element={
               <AdminProtected requiredRole="admin">
-              <AdminHome />
-             </AdminProtected>
+                <AdminHome />
+              </AdminProtected>
             }
           />
           <Route

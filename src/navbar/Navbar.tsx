@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
             Home
           </li>
         )}
-        <li onClick={() => navigateUser("")} className="cursor-pointer">
+        <li onClick={() => navigateUser("/search")} className="cursor-pointer">
           <IoIosSearch className="text-2xl font-extrabold" />
         </li>
         <li

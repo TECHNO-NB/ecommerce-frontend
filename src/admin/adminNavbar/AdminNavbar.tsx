@@ -6,17 +6,21 @@ import { IoIosSearch } from "react-icons/io";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const AdminNavbar: React.FC = () => {
   const navigate = useNavigate();
 
-  const navigateUser = (link: string): void => {
+  // @ts-ignores
+  const navigateUser = async(link: string): any => {
     navigate(link);
     if (link === "/login") {
+     const res=await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/users/logout`)
+     console.log(res)
       toast.success("Logout SuccessFully");
       localStorage.removeItem("persist:root");
     }
-  };
+  }
 
   return (
     <nav className="border-b-[0.1em] select-none sticky top-0 z-10 bg-white border-black h-[10vh] w-[100vw] flex justify-between items-center px-4 sm:px-16">
@@ -33,7 +37,7 @@ const AdminNavbar: React.FC = () => {
         >
           <IoIosAddCircleOutline className="text-2xl" />
         </li>
-        <li onClick={() => navigateUser("")} className="cursor-pointer">
+        <li onClick={() => navigateUser("/search")} className="cursor-pointer">
           <IoIosSearch className="text-2xl font-extrabold" />
         </li>
         <li
@@ -48,7 +52,7 @@ const AdminNavbar: React.FC = () => {
         </li>
       </ul>
     </nav>
-  );
+  )
 };
 
 export default AdminNavbar;

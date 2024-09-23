@@ -5,7 +5,7 @@ import LandingPageComp from "../components/LandingPageComp";
 import axios from "axios";
 import VideoLoader from "../components/VideoLoader";
 import { useNavigate } from "react-router-dom";
-// import ModalBox from "../components/ModalBox";
+import Pagination from "../components/Pagination";
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState([]);
@@ -16,10 +16,12 @@ const Home: React.FC = () => {
     try {
       (async () => {
         setIsloading(true);
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/product/getallproducts`);
+        const res = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/product/getallproducts`
+        );
         setIsloading(false);
         setProducts(res.data.data);
-        console.log(res.data)
+        console.log(res.data);
       })();
     } catch (error) {
       console.log(error);
@@ -34,10 +36,13 @@ const Home: React.FC = () => {
       <div className="">
         <LandingPageComp />
       </div>
-     
-      <h1 className="text-3xl mt-2 font-bold pl-2 md:pl-16 md:text-5xl text-[#0086FF]">
-        Products:
-      </h1>
+
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl mt-2 font-bold pl-2 md:pl-16 md:text-5xl text-[#0086FF]">
+          Products:
+        </h1>
+        <h1 onClick={()=> navigate("/search")} className="mr-16 text-xl cursor-pointer font-bold text-[#0086FF]">More:</h1>
+      </div>
       {isLoading ? (
         <VideoLoader />
       ) : (
@@ -49,6 +54,8 @@ const Home: React.FC = () => {
           </div>
         </div>
       )}
+
+      <Pagination />
     </div>
   );
 };
