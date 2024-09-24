@@ -5,7 +5,6 @@ import Register from "./auth/Register";
 import Login from "./auth/Login";
 
 import { Toaster } from "react-hot-toast";
-
 import ProtectedRoute from "./protectedRoute/ProtectedRoute";
 import AdminHome from "./admin/AdminHome";
 import AdminProtected from "./protectedRoute/AdminProtected";
@@ -15,10 +14,13 @@ import Cart from "./pages/Cart";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 
+import UserVerifier from "./components/UserVerifier"; // New component for user verification
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <GoogleOAuthProvider clientId="771984729352-gnod99m6of797a0sk3v0liairf4mlujo.apps.googleusercontent.com">
+        <UserVerifier /> {/* user verify on app load */}
         <Routes>
           <Route
             path="/"
@@ -27,7 +29,7 @@ const App: React.FC = () => {
                 <Home />
               </ProtectedRoute>
             }
-          ></Route>
+          />
           <Route
             path="/cart"
             element={
@@ -76,7 +78,6 @@ const App: React.FC = () => {
           }}
         />
       </GoogleOAuthProvider>
-      ;
     </BrowserRouter>
   );
 };

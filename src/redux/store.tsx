@@ -9,12 +9,12 @@ import { persistReducer, persistStore } from "redux-persist";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "product"], // Ensure these are the correct keys
+  whitelist: ["product", "modal"], 
 };
 
 // Combine reducers
 const rootReducer = combineReducers({
-  user: userReducer,
+  user: userReducer, 
   product: productReducer,
   modal: ModalSlice,
 });
@@ -25,13 +25,12 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 // Define the RootState type
 export type RootState = ReturnType<typeof rootReducer>;
 
-// Configure the store with the persisted reducer
+
 const store = configureStore({
   reducer: persistedReducer,
-  // Add a middleware configuration to handle non-serializable values if needed
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // Turn off serializable check if absolutely necessary
+      serializableCheck: false, 
     }),
 });
 
@@ -40,4 +39,5 @@ export const persistor = persistStore(store);
 
 // Define AppDispatch type
 export type AppDispatch = typeof store.dispatch;
+
 export { store };

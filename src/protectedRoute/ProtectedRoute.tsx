@@ -5,14 +5,16 @@ import { RootState } from "../redux/store";
 
 interface ProtectedRouteProps {
   children: ReactNode;
-  requiredRole?: string; // Optional role check
+  requiredRole?: string;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requiredRole }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  children,
+  requiredRole,
+}) => {
   const user = useSelector((state: RootState) => state.user);
-  console.log(user)
+  console.log(user);
 
-  // Check if the user is logged in and optionally if the user has the required role
   const isAuthenticated = user.isLoggedIn;
   const hasRequiredRole = requiredRole ? user.role === requiredRole : true;
 
