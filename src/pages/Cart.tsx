@@ -3,17 +3,17 @@ import Navbar from "../navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { deleteProducts } from "../redux/ProductSlice";
-import StripeCheckout from "react-stripe-checkout";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 interface ProductQuantity {
-  [key: string]: number; // key is the product _id
+  [key: string]: number;
 }
 
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.product);
 
-  // State to manage the quantity of each product
   const [quantities, setQuantities] = useState<ProductQuantity>({});
 
   const increaseQuantity = (id: string) => {
@@ -43,6 +43,28 @@ const Cart: React.FC = () => {
     (total, product) => total + product.price * (quantities[product._id] || 1),
     0
   );
+
+  const handlePayment = async (price: Number) => {
+    const stripe = await loadStripe(
+      import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
+    );
+
+    try {
+      const session = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/payment`,
+        {
+          price: price,
+          products,
+        }
+      );
+      const checkout = await stripe?.redirectToCheckout({
+        sessionId: session.data.id,
+      });
+      console.log(checkout);
+    } catch (error) {
+      console.log("Failed to paid", error);
+    }
+  };
 
   return (
     <div>
@@ -95,13 +117,34 @@ const Cart: React.FC = () => {
             </div>
           ))}
           {/* card end here */}
-          <div className="border py-2 mt-2 flex justify-between items-center ">
-            <h1 className="font-bold ml-4 text-xl ">{`Total: $${totalPrice.toFixed(
-              2
-            )}`}</h1>
+          <div className="border py-2 mt-0 flex justify-between items-center sm:justify-around ">
+            <div className="">
+              <h1 className="font-bold">Order summary</h1>
+              <div className="flex gap-4 justify-between  sm:gap-10">
+                <p>Subtotal</p>
+                <p>{`$${totalPrice.toFixed(2)}`}</p>
+              </div>
+
+              <div className="flex gap-4 justify-between  sm:gap-10">
+                <p>Shipping estimate</p>
+                <p>$0.00</p>
+              </div>
+
+              <div className="flex gap-4 justify-between  sm:gap-10">
+                <p>Tax estimate</p>
+                <p>$0.00</p>
+              </div>
+              <h1 className="font-bold  text-xl ">{`Total: $${totalPrice.toFixed()}`}</h1>
+            </div>
+
             {products.length === 0 ? null : (
               <div className="mr-2 md:mr-6">
-                <StripeCheckout stripeKey={`${import.meta.env.STRIPE_SCREATE}`} token={() => {}} name="Checkout" />
+                <button
+                  onClick={() => handlePayment(totalPrice)}
+                  className="border-2 bg-green-500 px-2 py-1 text-white"
+                >
+                  Checkout
+                </button>
               </div>
             )}
           </div>

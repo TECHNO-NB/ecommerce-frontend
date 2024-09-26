@@ -15,8 +15,11 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 
 import UserVerifier from "./components/UserVerifier"; // New component for user verification
+import Success from "./components/Success";
+import Cancel from "./components/Cancel";
 
 const App: React.FC = () => {
+  console.log(import.meta.env.VITE_STRIPE_SCREATE);
   return (
     <BrowserRouter>
       <GoogleOAuthProvider clientId="771984729352-gnod99m6of797a0sk3v0liairf4mlujo.apps.googleusercontent.com">
@@ -48,6 +51,8 @@ const App: React.FC = () => {
           />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/success" element={<Success />} />
+          <Route path="/cancel" element={<Cancel />} />
         </Routes>
         <Routes>
           <Route
