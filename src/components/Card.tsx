@@ -29,7 +29,11 @@ const Card: React.FC<CardProps> = ({ data }) => {
       return;
     }
     try {
-      const deletedProduct = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/product/deleteoneproduct/${id}`
+      axios.defaults.withCredentials = true;
+      const deletedProduct = await axios.delete(
+        `${
+          import.meta.env.VITE_BACKEND_URL
+        }/api/v1/product/deleteoneproduct/${id}`
       );
       console.log(deletedProduct.data);
       toast.success("Product deleted successfully");
@@ -55,7 +59,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
       price,
     };
     dispatch(addProductsTOCard(cartProduct));
-    toast.success("SuccessFully Added")
+    toast.success("SuccessFully Added");
   };
 
   return (

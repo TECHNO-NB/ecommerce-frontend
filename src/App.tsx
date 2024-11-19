@@ -17,6 +17,7 @@ import Search from "./pages/Search";
 import UserVerifier from "./components/UserVerifier"; // New component for user verification
 import Success from "./components/Success";
 import Cancel from "./components/Cancel";
+import Order from "./pages/Order";
 
 const App: React.FC = () => {
   console.log(import.meta.env.VITE_STRIPE_SCREATE);
@@ -46,6 +47,14 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Search />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order"
+            element={
+              <ProtectedRoute>
+                <Order />
               </ProtectedRoute>
             }
           />

@@ -53,6 +53,7 @@ const Register: React.FC = () => {
   const loginWithGoogle = async (detail: any) => {
     try {
       setLoader(true);
+      axios.defaults.withCredentials = true;
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/users/googlelogin`,
         {

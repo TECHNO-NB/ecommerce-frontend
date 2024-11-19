@@ -5,6 +5,7 @@ import { RootState } from "../redux/store";
 import { deleteProducts } from "../redux/ProductSlice";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface ProductQuantity {
   [key: string]: number;
@@ -14,6 +15,7 @@ const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.product);
 
+  const navigate = useNavigate();
   const [quantities, setQuantities] = useState<ProductQuantity>({});
 
   const increaseQuantity = (id: string) => {
@@ -50,6 +52,7 @@ const Cart: React.FC = () => {
     );
 
     try {
+      axios.defaults.withCredentials = true;
       const session = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/v1/payment`,
         {
@@ -149,6 +152,12 @@ const Cart: React.FC = () => {
             )}
           </div>
         </div>
+        <button
+          onClick={() => navigate("/order")}
+          className="m-auto border-2  bg-red-500 mt-5 text-white p-2 rounded-lg "
+        >
+          My Orders
+        </button>
       </div>
     </div>
   );

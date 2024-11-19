@@ -13,6 +13,7 @@ const AdminHome: React.FC = () => {
     try {
       (async () => {
         setIsloading(true);
+        axios.defaults.withCredentials = true;
         const res = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/v1/product/getallproducts`
         );
@@ -31,9 +32,10 @@ const AdminHome: React.FC = () => {
     );
     if (promptVal !== "YES ALL PRODUCTS") {
       toast.error("Product not deleted");
-      return
+      return;
     }
     try {
+      axios.defaults.withCredentials = true;
       const res = await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}api/v1/product/deleteallproducts`
       );

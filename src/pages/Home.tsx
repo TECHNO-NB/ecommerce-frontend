@@ -16,6 +16,7 @@ const Home: React.FC = () => {
     try {
       (async () => {
         setIsloading(true);
+        axios.defaults.withCredentials = true;
         const res = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/v1/product/getallproducts`
         );
@@ -41,7 +42,12 @@ const Home: React.FC = () => {
         <h1 className="text-3xl mt-2 font-bold pl-2 md:pl-16 md:text-5xl text-[#0086FF]">
           Products:
         </h1>
-        <h1 onClick={()=> navigate("/search")} className="mr-16 text-xl cursor-pointer font-bold text-[#0086FF]">More:</h1>
+        <h1
+          onClick={() => navigate("/search")}
+          className="mr-16 text-xl cursor-pointer font-bold text-[#0086FF]"
+        >
+          More:
+        </h1>
       </div>
       {isLoading ? (
         <VideoLoader />

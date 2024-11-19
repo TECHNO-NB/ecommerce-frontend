@@ -15,6 +15,7 @@ const AdminNavbar: React.FC = () => {
   const navigateUser = async(link: string): any => {
     navigate(link);
     if (link === "/login") {
+      axios.defaults.withCredentials=true;
      const res=await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/users/logout`)
      console.log(res)
       toast.success("Logout SuccessFully");

@@ -16,15 +16,14 @@ const Search: React.FC = () => {
   // Handle Sorting Changes
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(event.target.value);
-    setSortByOpen(false)
+    setSortByOpen(false);
     console.log("Selected Sort Order:", event.target.value);
   };
 
   // Handle Category Changes
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-
     setSelectedCategory(event.target.value);
-    setSortByOpen(false)
+    setSortByOpen(false);
     console.log("Selected Category:", event.target.value);
   };
 
@@ -42,6 +41,7 @@ const Search: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        axios.defaults.withCredentials = true;
         const { data } = await axios.get(
           `${
             import.meta.env.VITE_BACKEND_URL
@@ -55,7 +55,7 @@ const Search: React.FC = () => {
     };
 
     fetchData();
-  }, [selectedCategory, minPrice,sortOrder]);
+  }, [selectedCategory, minPrice, sortOrder]);
 
   // Debounced Search Handler
   const handleInputSearch = useCallback(
