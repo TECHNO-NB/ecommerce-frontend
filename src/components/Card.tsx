@@ -1,10 +1,10 @@
 import React from "react";
-import { IoIosAdd } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { addProductsTOCard } from "../redux/ProductSlice";
+import { FaStar } from "react-icons/fa"; // Importing the star icon
 
 interface CardProps {
   data: {
@@ -59,45 +59,59 @@ const Card: React.FC<CardProps> = ({ data }) => {
       price,
     };
     dispatch(addProductsTOCard(cartProduct));
-    toast.success("SuccessFully Added");
+    toast.success("Successfully Added");
   };
 
   return (
     <div className="mt-0 select-none lg:mt-2">
-      <div className="bg-[#F4DCD2]  h-[11em] flex items-center justify-center md:h-[13em] ">
-        <img
-          className="w-48 h-full -z-1 md:h-auto"
-          src={data.image}
-          alt={data.product}
-        />
-      </div>
-      <div className="bg-[#DEBEAE] h-[4em] z-10 flex justify-between items-center px-2 md:px-12 lg:h-[5em]">
-        <div className="text-[17px] sm:text-[19px] lg:text-[20px]">
-          <h1>{data.product}</h1>
-          <div className="flex gap-3 items-center sm:gap-8">
-            <p>{`$ ${data.price}`}</p>
-            {/* <div className="bg-red-600 text-[10px] h-[18px] text-white text-center rounded-full px-2 flex items-center justify-center sm:text-sm sm:h-[25px]">
-              <p className="">-100%</p>
-            </div> */}
+      <div className="flex justify-center items-center">
+        <div className="card bg-[#0086FF] rounded-lg shadow-md overflow-hidden w-72 h-[350px] transition-transform duration-300 ease-in-out hover:-translate-y-1">
+          {/* Image Container */}
+          <div className="h-[200px] bg-[#0086FF] overflow-hidden flex items-center justify-center">
+            <img
+              src={data.image}
+              alt="Product"
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+          {/* Content */}
+          <div className="bg-white p-4 flex flex-col justify-between h-[150px]">
+            <div>
+              <h3 className="text-lg font-bold text-gray-800 mb-2">
+                {data.product}
+              </h3>
+              {/* Price with Star */}
+              <div className="flex justify-between items-center mb-4">
+                <p className="text-base font-bold text-green-500">
+                  ${data.price}
+                </p>
+                <div className="flex ">
+
+            <FaStar className="text-yellow-400" /> 
+                <FaStar className="text-yellow-400" /> 
+                <FaStar className="text-yellow-400" /> 
+                </div>
+              </div>
+            </div>
+            {user.isLoggedIn && user.role !== "admin" ? (
+              <button
+                onClick={() =>
+                  addToCart(data._id, data.product, data.image, data.price)
+                }
+                className="inline-block bg-[#0086FF] text-white px-5 py-2 rounded-md text-sm font-bold text-center transition-colors duration-300 ease-in-out hover:bg-blue-700"
+              >
+                Add to Cart
+              </button>
+            ) : (
+              <button
+                onClick={() => deleteOneProduct(data._id)}
+                className="inline-block bg-[#0086FF] text-white px-5 py-2 rounded-md text-sm font-bold text-center transition-colors duration-300 ease-in-out hover:bg-blue-700"
+              >
+                Delete
+              </button>
+            )}
           </div>
         </div>
-        {user.isLoggedIn && user.role === "admin" ? (
-          <button
-            onClick={() => deleteOneProduct(data._id)}
-            className="bg-red-500 text-white px-2 rounded"
-          >
-            Delete
-          </button>
-        ) : (
-          <div
-            onClick={() =>
-              addToCart(data._id, data.product, data.image, data.price)
-            }
-            className="bg-white rounded-full mr-1 cursor-pointer"
-          >
-            <IoIosAdd className="text-black text-3xl lg:text-4xl" />
-          </div>
-        )}
       </div>
     </div>
   );

@@ -1,38 +1,35 @@
 import React from "react";
-import modelGirlCover from "../assets/model2.png";
-
-
+import modelGirlCover from "../assets/ecommerce pic.png";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const LandingPageComp: React.FC = () => {
-
   return (
-    <div className=" w-[100vw] h-[] px-0  md:px-16 md:pr-16 md:h-[90vh] ">
-      <div className="flex items-center gap-0 h-[30vh] bg-[#f3f367] md:gap-4 px-0 md:px-16 md:h-[85vh] ">
-        {/* left */}
-        <div className="w-[100%] h-[100%] md:w-[50%] ">
-          <img
-            src={modelGirlCover}
-            alt="image"
-            className="scale-x-[-1] w-[100%] h-[100%] pl-0 md:pl-0"
-          />
-        </div>
+    <div className="w-[100%] bg-[#E0E6EC]  lg:h-[90vh]  flex flex-col md:flex-row ">
+      <div className=" left w-[100%] mt-4 md:mt-0 md:w-[60%] text-center  flex  md:justify-start h-[50%] lg:h-[100%]">
+        <div className="flex flex-col items-start justify-center md:justify-start md:mt-20">
+          <div className="text-6xl  lg:text-9xl">
+            <h1 className="font-bold">World No. 1</h1>
+            <h1 className="font-bold  lg:mr-10">Ecommerce </h1>
+          </div>
 
-        {/* right */}
-        <div className="w-[70%] flex flex-col items-start mr-5 md-[100%]">
-       
-          <h1 className="text-4xl hidden font-bold md:text-8xl md:block">
-            World No. 1 <br/>E-commerce
-            <span className="text-[#0086FF]"> Scatch</span>
+          <h1 className="text-[#0086FF] font-extrabold text-7xl lg:text-9xl">
+            Scatch
           </h1>
-
-          <h1 className="text-3xl  block font-bold md:text-8xl md:hidden">
-            World No. 1 Ecommerce
-            <span className="text-[#0086FF]"> Scatch</span>
-          </h1>
-          <h1 className="text-[12px] font-bold sm:text-2xl">
+          <h1 className="font-bold text-[25px]  md:text-3xl ">
             Welcome to <span className="text-[#0086FF]">E-commerce</span>
           </h1>
+          <button className="mt-4 bg-[#0086FF] flex justify-center items-center gap-2 text-center w-60 h-10 rounded-2xl font-bold text-xl text-white hover:bg-red-600">
+            Shop now{<FaArrowRightLong className="mt-1" />}
+          </button>
         </div>
+      </div>
+      <div className="right w-[100%] md:w-[40%] h-[50%] lg:w-[50%] lg:h-[80vh]  ">
+        <img
+          className=" filter drop-shadow-blue-600 h-[100%] w-[100%] mt-14 "
+          src={modelGirlCover}
+          style={{ filter: "drop-shadow(0 20px 20px #0086FF" }}
+          alt="cover"
+        />
       </div>
     </div>
   );

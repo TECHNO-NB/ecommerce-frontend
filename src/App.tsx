@@ -24,12 +24,12 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <GoogleOAuthProvider clientId="771984729352-gnod99m6of797a0sk3v0liairf4mlujo.apps.googleusercontent.com">
-        <UserVerifier /> {/* user verify on app load */}
+        <UserVerifier />
         <Routes>
           <Route
             path="/"
             element={
-              <ProtectedRoute>
+               <ProtectedRoute>
                 <Home />
               </ProtectedRoute>
             }

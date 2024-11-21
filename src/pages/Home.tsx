@@ -32,14 +32,14 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="h-auto select-none  sm:bg-white">
+    <div className="h-auto bg-[#E0E6EC]  select-none  ">
       <Navbar />
-      <div className="">
+      <div className="px-2 md:px-16 lg:px-20">
         <LandingPageComp />
       </div>
 
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl mt-2 font-bold pl-2 md:pl-16 md:text-5xl text-[#0086FF]">
+      <div className="flex justify-between items-center px-2 md:px-16 lg:px-20 border-t-4 border-black pt-5">
+        <h1 className="text-3xl mt-2 font-bold pl-2  md:text-5xl text-[#0086FF]">
           Products:
         </h1>
         <h1
@@ -52,13 +52,25 @@ const Home: React.FC = () => {
       {isLoading ? (
         <VideoLoader />
       ) : (
-        <div className="flex  w-[100vw] px-20 flex-col items-center lg:items-start sm:px-16 lg:flex-row">
-          <div className="grid  w-[97.8vw] gap-4 gap-x-2  grid-y-2 mt-2  gap-y-2 lg:gap-y-0 grid-cols-2 md-gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:w-[98vw] ">
-            {products.map((v) => (
-              <Card key={v} data={v} />
-            ))}
-          </div>
+        <div className="flex w-full flex-col items-center lg:items-start px-4 sm:px-8 lg:px-16 lg:flex-row">
+        <div className="grid w-full gap-4 mt-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {products.map((v, index) => (
+            <>
+            <Card key={index} data={v} />
+            <Card key={index} data={v} />
+            <Card key={index} data={v} />
+            <Card key={index} data={v} />
+            <Card key={index} data={v} />
+            <Card key={index} data={v} />
+            <Card key={index} data={v} />
+            <Card key={index} data={v} />
+            <Card key={index} data={v} />
+            <Card key={index} data={v} />
+            </>
+          ))}
         </div>
+      </div>
+      
       )}
 
       <Pagination />
