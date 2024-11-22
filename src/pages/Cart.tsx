@@ -3,8 +3,7 @@ import Navbar from "../navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { deleteProducts } from "../redux/ProductSlice";
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 
 interface ProductQuantity {
@@ -47,25 +46,12 @@ const Cart: React.FC = () => {
   );
 
   const handlePayment = async (price: Number) => {
-    const stripe = await loadStripe(
-      import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
-    );
-
     try {
-      axios.defaults.withCredentials = true;
-      const session = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/payment`,
-        {
-          price: price,
-          products,
-        }
-      );
-      const checkout = await stripe?.redirectToCheckout({
-        sessionId: session.data.id,
+      navigate("/payment", {
+        state: { price: price, products: products },
       });
-      console.log(checkout);
     } catch (error) {
-      console.log("Failed to paid", error);
+      console.log(error);
     }
   };
 
@@ -80,7 +66,6 @@ const Cart: React.FC = () => {
               key={product._id}
               className="card border flex items-center justify-between mb-4"
             >
-              {/* left */}
               <div className="flex items-center">
                 <img
                   className="w-20"

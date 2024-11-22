@@ -7,18 +7,16 @@ import { RootState } from "../redux/store";
 import { MdLogout } from "react-icons/md";
 import { openModal } from "../redux/ModalSlice";
 
-
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const product=useSelector((state:RootState)=>state.product)
+  const product = useSelector((state: RootState) => state.product);
   const user = useSelector((state: RootState) => state.user);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const navigateUser = (link: string): void => {
     navigate(link);
-    if(link ==="/login"){
-    dispatch(openModal(true))
+    if (link === "/login") {
+      dispatch(openModal(true));
     }
-    
   };
 
   return (
@@ -45,7 +43,9 @@ const Navbar: React.FC = () => {
           className="relative cursor-pointer"
         >
           <IoCartOutline className="text-2xl" />
-          <p className="absolute top-[-0.9em]  text-red-600 left-2 ">{product.length}</p>
+          <p className="absolute top-[-0.9em]  text-red-600 left-2 ">
+            {product.length}
+          </p>
         </li>
         <li onClick={() => navigateUser("/login")} className="cursor-pointer">
           <MdLogout className="text-2xl" />

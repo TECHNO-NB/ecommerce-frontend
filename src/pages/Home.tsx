@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import Navbar from "../navbar/Navbar";
 import Card from "../components/Card";
 import LandingPageComp from "../components/LandingPageComp";
@@ -11,6 +11,7 @@ const Home: React.FC = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const navigate = useNavigate();
+  const id = useId();
 
   useEffect(() => {
     try {
@@ -53,24 +54,12 @@ const Home: React.FC = () => {
         <VideoLoader />
       ) : (
         <div className="flex w-full flex-col items-center lg:items-start px-4 sm:px-8 lg:px-16 lg:flex-row">
-        <div className="grid w-full gap-4 mt-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((v, index) => (
-            <>
-            <Card key={index} data={v} />
-            <Card key={index} data={v} />
-            <Card key={index} data={v} />
-            <Card key={index} data={v} />
-            <Card key={index} data={v} />
-            <Card key={index} data={v} />
-            <Card key={index} data={v} />
-            <Card key={index} data={v} />
-            <Card key={index} data={v} />
-            <Card key={index} data={v} />
-            </>
-          ))}
+          <div className="grid w-full gap-4 mt-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {products.map((v) => (
+              <Card key={id} data={v} />
+            ))}
+          </div>
         </div>
-      </div>
-      
       )}
 
       <Pagination />

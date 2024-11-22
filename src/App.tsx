@@ -18,6 +18,7 @@ import UserVerifier from "./components/UserVerifier"; // New component for user 
 import Success from "./components/Success";
 import Cancel from "./components/Cancel";
 import Order from "./pages/Order";
+import Payment from "./pages/Payment";
 
 const App: React.FC = () => {
   console.log(import.meta.env.VITE_STRIPE_SCREATE);
@@ -29,7 +30,7 @@ const App: React.FC = () => {
           <Route
             path="/"
             element={
-               <ProtectedRoute>
+              <ProtectedRoute>
                 <Home />
               </ProtectedRoute>
             }
@@ -50,6 +51,7 @@ const App: React.FC = () => {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/order"
             element={
@@ -60,6 +62,14 @@ const App: React.FC = () => {
           />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/payment"
+            element={
+              <ProtectedRoute>
+                <Payment />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
         </Routes>

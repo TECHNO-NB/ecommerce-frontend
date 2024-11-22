@@ -78,7 +78,7 @@ const Search: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col items-center mt-4 w-full">
+      <div className="flex flex-col items-center mt-4 w-full  ">
         {/* Search Input */}
         <div className="flex gap-2 items-center">
           <input
@@ -101,7 +101,7 @@ const Search: React.FC = () => {
           <div
             className={`w-30 fixed ${
               sortBySideBar ? "left-0" : "left-[-400px]"
-            } transition-all duration-300 ease-in-out h-screen bg-gray-100 p-4 md:w-80 `}
+            } transition-all duration-300 ease-in-out h-screen z-10 bg-gray-200 p-4 md:w-80 rounded-lg `}
           >
             <div className="flex items-center justify-center text-center gap-1">
               <select
