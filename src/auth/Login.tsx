@@ -40,8 +40,7 @@ const Login: React.FC = () => {
         };
         dispatch(login(user));
 
-        // Add a console.log to verify the role and navigation
-        console.log("User role:", res.data.data.user.role);
+   
 
         if (res.data.data.user.role === "admin") {
           navigate("/admin");

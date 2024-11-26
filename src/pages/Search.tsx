@@ -17,14 +17,14 @@ const Search: React.FC = () => {
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(event.target.value);
     setSortByOpen(false);
-    console.log("Selected Sort Order:", event.target.value);
+  
   };
 
   // Handle Category Changes
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCategory(event.target.value);
     setSortByOpen(false);
-    console.log("Selected Category:", event.target.value);
+    
   };
 
   // Handle Price Slider Changes

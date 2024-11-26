@@ -19,9 +19,10 @@ import Success from "./components/Success";
 import Cancel from "./components/Cancel";
 import Order from "./pages/Order";
 import Payment from "./pages/Payment";
+import ProductDetails from "./pages/ProductDetails";
 
 const App: React.FC = () => {
-  console.log(import.meta.env.VITE_STRIPE_SCREATE);
+ 
   return (
     <BrowserRouter>
       <GoogleOAuthProvider clientId="771984729352-gnod99m6of797a0sk3v0liairf4mlujo.apps.googleusercontent.com">
@@ -67,6 +68,15 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Payment />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/productdetails/:id"
+            element={
+              <ProtectedRoute>
+                <ProductDetails/>
               </ProtectedRoute>
             }
           />

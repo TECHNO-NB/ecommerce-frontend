@@ -13,7 +13,7 @@ const AdminProtected: React.FC<AdminProtectedRoute> = ({
   requiredRole,
 }) => {
   const user = useSelector((state: any) => state.user);
-  console.log(user);
+;
 
   if (user.role === "admin" && user.isLoggedIn && requiredRole === "admin") {
     return <>{children}</>;

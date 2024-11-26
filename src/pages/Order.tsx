@@ -24,7 +24,7 @@ const Order: React.FC = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}/api/v1/getorderdetails`
         );
-        console.log("Orders fetched:", response.data);
+   
         setOrders(response.data.data); // Assuming the response has `data` containing orders
       } catch (error) {
         console.error("Error fetching orders:", error);

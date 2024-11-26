@@ -23,7 +23,7 @@ const Home: React.FC = () => {
         );
         setIsloading(false);
         setProducts(res.data.data);
-        console.log(res.data);
+       
       })();
     } catch (error) {
       console.log(error);
@@ -53,10 +53,13 @@ const Home: React.FC = () => {
       {isLoading ? (
         <VideoLoader />
       ) : (
-        <div className="flex w-full flex-col items-center lg:items-start px-4 sm:px-8 lg:px-16 lg:flex-row">
-          <div className="grid w-full gap-4 mt-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="flex w-[100vw] px-20 flex-col items-center lg:items-start sm:px-16 lg:flex-row">
+          <div className="grid w-[97.8vw] gap-4 gap-x-2 grid-y-2 mt-2 gap-y-2 lg:gap-y-0 grid-cols-2 md-gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:w-[98vw]">
             {products.map((v) => (
+              <>
               <Card key={id} data={v} />
+              <Card key={id} data={v} />
+              </>
             ))}
           </div>
         </div>
