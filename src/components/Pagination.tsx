@@ -3,7 +3,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 const Pagination: React.FC = () => {
   return (
-    <div className="flex items-center justify-end border-t h-full w-[100vw] bg-[#E0E6EC]  px-4 py-3 sm:px-6">
+    <div className="flex items-center justify-end  h-full w-[100vw] bg-[#fff]  px-4 py-3 sm:px-6 mt-8">
       <div className="w-[100vw] flex justify-center items-end ">
         <div>
           <nav

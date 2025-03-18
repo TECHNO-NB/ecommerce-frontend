@@ -2,3 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+.img::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #F5E1FC;
+    height: 100%;
+    width: 70%;
+    border-radius: 80%;
+
+}
+.img img{
+    z-index: 20;
+}
+
+.img::after {
+    content: "";
+    position: absolute;
+    left: 60%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #F5E1FC;
+    height: 100%;
+    width: 70%;
+    border-radius: 80%;
+    opacity: 0.6;
+}
+.features{
+    width: 100%;
+    display: flex;
+    gap:30px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+     justify-content: center;
+     
+}
+
+@media (max-width:700px) {
+    .img::after,
+    .img::before {
+        width: 100%;
+
+    }
+}

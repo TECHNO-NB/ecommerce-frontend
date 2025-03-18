@@ -78,7 +78,7 @@ const Search: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col items-center mt-4 w-full  ">
+      <div className="flex flex-col items-center mt-[5rem] w-full  ">
         {/* Search Input */}
         <div className="flex gap-2 items-center">
           <input
