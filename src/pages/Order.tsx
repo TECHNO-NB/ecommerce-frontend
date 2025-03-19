@@ -17,6 +17,9 @@ type Order = {
 
 const Order: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +54,7 @@ const Order: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-100 p-5">
+      <div className="min-h-screen bg-gray-100 p-5 mt-[4rem]">
         <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg">
           <header className="bg-blue-500 text-white text-lg font-semibold px-4 py-3 rounded-t-lg">
             Order Management

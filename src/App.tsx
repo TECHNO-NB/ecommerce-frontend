@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./auth/Register";
@@ -22,7 +22,10 @@ import Payment from "./pages/Payment";
 import ProductDetails from "./pages/ProductDetails";
 
 const App: React.FC = () => {
- 
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [])
+  
   return (
     <BrowserRouter>
       <GoogleOAuthProvider clientId="771984729352-gnod99m6of797a0sk3v0liairf4mlujo.apps.googleusercontent.com">

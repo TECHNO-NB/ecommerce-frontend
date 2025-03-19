@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
@@ -12,6 +12,10 @@ interface ProductQuantity {
 }
 
 const Cart: React.FC = () => {
+
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const dispatch = useDispatch();
   const products = useSelector((state: RootState) => state.product);
 

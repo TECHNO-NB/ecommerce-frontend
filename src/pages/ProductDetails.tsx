@@ -10,6 +10,10 @@ const ProductDetails: React.FC = () => {
   const { id } = useParams();
 
   useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+    
+  useEffect(() => {
     if (!id) return;
 
     const fetchProduct = async () => {

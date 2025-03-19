@@ -12,6 +12,9 @@ const LandingPageComp: React.FC = () => {
       alt="Lamp Light"
       className="absolute top-10 left-0 md:left-[2%] w-24 md:w-24 lg:w-56"
     />
+    <div className="circe absolute w-3 h-3 bottom-28 left-6 sm:left-16 bg-pink-500 rounded-full">
+
+    </div>
 
     {/* Left Content */}
     <div className="md:w-1/2 text-center md:text-left md:space-y-4 md:mt-2  md:ml-20">

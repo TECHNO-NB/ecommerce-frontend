@@ -3,13 +3,10 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 
-
-
-
 const Footer: React.FC = () => {
   return (
     <>
-      <div className="bg-[#EEEFFB] flex justify-center  flex-col items-center py- ygap-10 flex-wrap mx-auto px-2 pb-4  md:px-16 lg:px-20">
+      <div className="bg-[#EEEFFB] flex justify-center mt-4 sm:mt-0  flex-col items-center py- ygap-10 flex-wrap mx-auto px-2 pb-4  md:px-16 lg:px-20">
         <div className="div flex gap-16 flex-wrap">
           <div className="title">
             <h1 className="text-2xl font-bold">Scatch</h1>
@@ -67,11 +64,11 @@ const Footer: React.FC = () => {
           <h1 className="text-[#9DA0AE] text-[1rem] sm:text-xl">
             &copy;Scatch - All Rights Reserved
           </h1>
-       <div className="icons flex gap-2">
-       <FaFacebookF/>
-       <FaInstagram/>
-       <FaTwitter/>
-       </div>
+          <div className="icons flex gap-2">
+            <FaFacebookF />
+             <FaInstagram />
+            <FaTwitter />
+          </div>
         </div>
       </div>
     </>

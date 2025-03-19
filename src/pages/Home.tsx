@@ -18,6 +18,11 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const id = useId();
 
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     try {
       (async () => {
@@ -116,7 +121,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -18,14 +18,12 @@ const Search: React.FC = () => {
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOrder(event.target.value);
     setSortByOpen(false);
-  
   };
 
   // Handle Category Changes
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCategory(event.target.value);
     setSortByOpen(false);
-    
   };
 
   // Handle Price Slider Changes
@@ -75,6 +73,10 @@ const Search: React.FC = () => {
     setSearchTerm(term);
     handleInputSearch(term);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
@@ -170,7 +172,7 @@ const Search: React.FC = () => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
