@@ -10,6 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <PersistGate loading={<Loader />} persistor={persistor}>
       <App />
+  
     </PersistGate>
   </Provider>
 );

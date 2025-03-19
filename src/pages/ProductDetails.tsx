@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Footer from "../components/footer/Footer";
 
 const ProductDetails: React.FC = () => {
   const [data, setData] = useState<any>(null);
@@ -99,13 +100,14 @@ const ProductDetails: React.FC = () => {
 
             {/* Add to Cart Button */}
             <div className="mt-6">
-              <button className="w-full bg-blue-500 text-white text-lg font-medium py-3 rounded-lg hover:bg-blue-600 transition">
+              <button className="w-full bg-pink-500 text-white text-lg font-medium py-3 rounded-lg hover:bg-blue-600 transition">
                 Add to Cart
               </button>
             </div>
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

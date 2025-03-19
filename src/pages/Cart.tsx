@@ -5,6 +5,7 @@ import { RootState } from "../redux/store";
 import { deleteProducts } from "../redux/ProductSlice";
 
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/footer/Footer";
 
 interface ProductQuantity {
   [key: string]: number;
@@ -58,7 +59,7 @@ const Cart: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <div className="px-[0.5em] select-none lg:px-[25em]">
+      <div className="px-[0.5em] mt-[4.3rem] pb-2 select-none lg:px-[25em]">
         <h1 className="font-bold mt-6 text-xl ">Shopping Cart</h1>
         <div className="w-full flex flex-col mt-4">
           {products.map((product) => (
@@ -144,6 +145,7 @@ const Cart: React.FC = () => {
           My Orders
         </button>
       </div>
+      <Footer/>
     </div>
   );
 };

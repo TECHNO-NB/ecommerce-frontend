@@ -10,6 +10,7 @@ import FeaturedProducts from "../components/FeaturedProducts";
 import OfferCard from "../components/OfferCard";
 import offerData from "../components/OfferData";
 import sofa from "../assets/sofa.png";
+import Footer from "../components/footer/Footer";
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState([]);
@@ -74,8 +75,7 @@ const Home: React.FC = () => {
           {offerData && offerData.map((val: any) => <OfferCard data={val} />)}
         </div>
       </div>
-     
-     
+
       <div className="latest-products bg-[#F1F0FF] flex items-center justify-center mt-14 mx-auto px-2  md:px-16 lg:px-20 pb-4 sm:pb-0">
         <div className="flex items-center justify-center flex-wrap">
           <div className="left flex items-center justify-center ">
@@ -104,16 +104,19 @@ const Home: React.FC = () => {
               </div>
             </div>
             <div className="flex items-center gap-4">
-
-            <button className="mt-6 bg-pink-500 text-white px-6 py-2  shadow-lg hover:bg-pink-600 transition">
-              Add To Cart
-            </button>
-            <p className="mt-4 text-[#1A0B5B]">B&B Italian Sofa<br/>
-            $32.00</p>
+              <button className="mt-6 bg-pink-500 text-white px-6 py-2  shadow-lg hover:bg-pink-600 transition">
+                Add To Cart
+              </button>
+              <p className="mt-4 text-[#1A0B5B]">
+                B&B Italian Sofa
+                <br />
+                $32.00
+              </p>
             </div>
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

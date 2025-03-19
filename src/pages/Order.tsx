@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
 import axios from "axios";
+import Footer from "../components/footer/Footer";
 
 type Product = {
   product: string;
@@ -96,6 +97,7 @@ const Order: React.FC = () => {
           </footer>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

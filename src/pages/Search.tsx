@@ -3,6 +3,7 @@ import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import Card from "../components/Card";
 import { debounce } from "lodash"; // Use lodash for debouncing
+import Footer from "../components/footer/Footer";
 
 const Search: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -89,7 +90,7 @@ const Search: React.FC = () => {
             onChange={handleSearchChange}
           />
           <button
-            className="ml-4 bg-black text-white block px-4 h-6 rounded-md "
+            className="ml-4 bg-pink-500 text-white block px-4 h-6 rounded-md "
             onClick={openSideBar}
           >
             Sort
@@ -169,6 +170,7 @@ const Search: React.FC = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
