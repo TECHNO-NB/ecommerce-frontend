@@ -5,7 +5,7 @@ import chair from "../assets/chair.png";
 
 const LandingPageComp: React.FC = () => {
   return (
-    <section className="relative pt-24 z-0 w-full bg-[#F8F8FF] py-12 px-6 md:px-30 lg:px-32 flex flex-col md:flex-row items-center justify-between overflow-hidden">
+    <section className="relative pt-24 z-0 w-full bg-[#F2F0FF] py-12 px-6 md:px-30 lg:px-32 flex flex-col md:flex-row items-center justify-between overflow-hidden">
     {/* Lamp Light */}
     <img
       src={light} // Replace with actual lamp image URL
