@@ -104,7 +104,8 @@ const Card: React.FC<CardProps> = ({ data }) => {
                 </div>
               </div>
             </div>
-            {user.isLoggedIn && user.role !== "admin" ? (
+           
+            {user.role !== "admin" ? (
               <button
                 onClick={() =>
                   addToCart(data._id, data.product, data.image, data.price)
