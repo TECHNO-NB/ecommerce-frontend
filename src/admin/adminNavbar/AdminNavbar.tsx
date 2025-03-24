@@ -1,5 +1,5 @@
 import React from "react";
-import { IoCartOutline } from "react-icons/io5";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
@@ -42,11 +42,10 @@ const AdminNavbar: React.FC = () => {
           <IoIosSearch className="text-2xl font-extrabold" />
         </li>
         <li
-          onClick={() => navigateUser("")}
+          onClick={() => navigateUser("/admin-controls")}
           className="relative cursor-pointer"
         >
-          <IoCartOutline className="text-2xl" />
-          <p className="absolute top-[-0.9em]  text-red-800 left-2 ">0</p>
+          <MdOutlineAdminPanelSettings className="text-2xl"/>
         </li>
         <li onClick={() => navigateUser("/login")} className="cursor-pointer">
           <MdLogout className="text-2xl" />

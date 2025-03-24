@@ -20,6 +20,7 @@ import Cancel from "./components/Cancel";
 import Order from "./pages/Order";
 import Payment from "./pages/Payment";
 import ProductDetails from "./pages/ProductDetails";
+import AdminControls from "./admin/AdminControls";
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -92,6 +93,14 @@ const App: React.FC = () => {
             element={
               <AdminProtected requiredRole="admin">
                 <AdminHome />
+              </AdminProtected>
+            }
+          />
+           <Route
+            path="/admin-controls"
+            element={
+              <AdminProtected requiredRole="admin">
+                <AdminControls />
               </AdminProtected>
             }
           />
