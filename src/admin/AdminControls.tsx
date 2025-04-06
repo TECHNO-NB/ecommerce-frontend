@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import AdminNavbar from "./adminNavbar/AdminNavbar";
 import axios from "axios";
+import ChangeStatus from "./admin-components/ChangeStatus";
 
 const AdminControls = () => {
   const [activeTab, setActiveTab] = useState("users");
@@ -44,40 +45,43 @@ const UsersTab = () => {
   const [users, setUsers] = useState<any>([]);
   useEffect(() => {
     const fetchUSers = async () => {
-     try {
-      axios.defaults.withCredentials = true;
-      const users= await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/getallusers`);
-      
-      setUsers(users.data.data)
-     } catch (error) {
-      console.error(error);
-     }
+      try {
+        axios.defaults.withCredentials = true;
+        const users = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/getallusers`
+        );
+
+        setUsers(users.data.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchUSers();
   }, []);
- 
+
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Users</h2>
       <div className="space-y-3">
-        {users && users.map((user:any) => (
-          <div
-            key={user._id}
-            className="flex justify-between items-center p-3 bg-gray-100 rounded-lg shadow"
-          >
-            <span>
-              {user.fullName} - {user.role}
-            </span>
-            <div className="space-x-2">
-              <button className="bg-green-500 text-white px-3 py-1 rounded">
-                Make Admin
-              </button>
-              <button className="bg-red-500 text-white px-3 py-1 rounded">
-                Delete
-              </button>
+        {users &&
+          users.map((user: any) => (
+            <div
+              key={user._id}
+              className="flex justify-between items-center p-3 bg-gray-100 rounded-lg shadow"
+            >
+              <span>
+                {user.fullName} - {user.role}
+              </span>
+              <div className="space-x-2">
+                <button className="bg-green-500 text-white px-3 py-1 rounded">
+                  Make Admin
+                </button>
+                <button className="bg-red-500 text-white px-3 py-1 rounded">
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
@@ -87,14 +91,16 @@ const ProductsTab = () => {
   const [products, setProducts] = useState<any>([]);
   useEffect(() => {
     const fetchUSers = async () => {
-     try {
-      axios.defaults.withCredentials = true;
-      const products= await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/getallproducts`);
-      
-      setProducts(products.data.data)
-     } catch (error) {
-      console.error(error);
-     }
+      try {
+        axios.defaults.withCredentials = true;
+        const products = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/getallproducts`
+        );
+
+        setProducts(products.data.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchUSers();
   }, []);
@@ -102,7 +108,7 @@ const ProductsTab = () => {
     <div>
       <h2 className="text-2xl font-bold mb-4">Products</h2>
       <div className="space-y-3">
-        {products.map((product:any) => (
+        {products.map((product: any) => (
           <div
             key={product._id}
             className="flex justify-between items-center p-3 bg-gray-100 rounded-lg shadow"
@@ -127,24 +133,28 @@ const ProductsTab = () => {
 
 const OrdersTab = () => {
   const [orders, setOrders] = useState<any>([]);
+  const[isModalShow,setIsModalShow]=useState<boolean>(false);
   useEffect(() => {
     const fetchUSers = async () => {
-     try {
-      axios.defaults.withCredentials = true;
-      const orders= await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/getallorders`);
-      console.log("orders",orders.data.data)
-      setOrders(orders.data.data)
-     } catch (error) {
-      console.error(error);
-     }
+      try {
+        axios.defaults.withCredentials = true;
+        const orders = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/getallorders`
+        );
+        console.log("orders", orders.data.data);
+        setOrders(orders.data.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
     fetchUSers();
   }, []);
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Orders</h2>
+      <h2 className="text-2xl font-bold mb-4 relative w-full">Orders</h2>
+     {isModalShow ?<ChangeStatus  props={setIsModalShow}/> : null}
       <div className="space-y-3">
-        {orders.map((order:any) => (
+        {orders.map((order: any) => (
           <div
             key={order._id}
             className="flex justify-between items-center p-3 bg-gray-100 rounded-lg shadow"
@@ -152,7 +162,7 @@ const OrdersTab = () => {
             <span>
               {order.user.fullName} - {order.status}
             </span>
-            <button className="bg-yellow-500 text-white px-3 py-1 rounded">
+            <button onClick={()=>setIsModalShow(true)} className="bg-yellow-500 text-white px-3 py-1 rounded">
               Change Status
             </button>
           </div>
